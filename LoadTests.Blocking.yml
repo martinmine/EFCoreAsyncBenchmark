@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:5000"
+  http:
+    pool: 200
+  phases:
+    - name: "Warmup"
+      duration: 5
+      arrivalRate: 10
+      rampTo: 10
+    - name: "Stress test"
+      duration: 1200
+      arrivalRate: 35
+      maxVusers: 200
+scenarios:
+  - name: "Benchmark" 
+    flow:
+      - get:
+          name: "Get"
+          url: "/blocking"
